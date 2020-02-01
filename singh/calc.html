@@ -1,0 +1,60 @@
+<html>
+<head>
+        <title>Linear system with 3 variable</title>
+    <style>
+		form#page
+		{
+			width: 550px;
+			margin: 24px auto;
+			padding: 24px 32px;
+			border: solid 1px #BBF;
+			border-radius: 8px;
+			box-shadow: 2px 2px 2px #88C ;
+			background-color: #EEF;
+			line-height: 48px;
+			font-family: Geneva, Arial;
+			color: #200040;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		form#page input
+		{
+			border: solid 1px #88C;
+			padding: 2px 8px;
+			border-radius	: 4px;
+			text-align: right;
+			font-family: Geneva, Arial;
+			color: #200040;
+			font-size	: 14px;
+			font-weight: bold;
+			color: #003;
+		}
+
+		form#page span
+		{
+			display: block;
+			margin-top: -24px;
+			font-size	: 10px;
+			font-weight: normal;
+		}
+	</style>
+</head>
+<body>
+	<form id='page' name='page' action="/cgi-bin/math.py" method="get">
+	    <center>
+		<input name='a' size=4> *x + <input name='b' size=4> *y + <input name='c' size=4> *z = <input name='d' size=4>
+		<br>
+		<input name='e' size=4> *x + <input name='f' size=4> *y + <input name='g' size=4> *z = <input name='h' size=4>
+		<br>
+		<input name='i' size=4> *x + <input name='j' size=4> *y + <input name='k' size=4> *z = <input name='l' size=4>
+		<br>
+		<input type='button' value='enter' onclick=' root(); '> 
+		<hr>
+		x = <input name='x1' size=16 readonly> <br>
+		y = <input name='x2' size=16 readonly> <br>
+		z = <input name='x3' size=16 readonly> <br>
+	    </center>
+	</form>
+</body>
+</html>
