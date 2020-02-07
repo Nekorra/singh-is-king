@@ -1,6 +1,8 @@
 <html>
 <head>
-        <title>Linear system with 3 variable</title>
+        <title>Linear system with 3 variables</title>
+	<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAD///8A/5ouANtxAADtewAAuF8AAP+GBQDMaQAAqFcAAP+PFwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAd3d3dwAAAAB3d3d3AAAAAEREREQAAAAARERERAAAAABmZmZmAAAAAGZmZmYAAAAAIAAiIgAAAQAgIiIiAAABADMDMwARAAEAMzAzMwABEQBQMFUAEQEBAFUFVVUAAQEAiIiIiAAAAACIiIiIAAAAABEREREAAAAAEREREQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+
     <style>
 		form#page
 		{
@@ -41,7 +43,7 @@
 	</style>
 </head>
 <body>
-	<form id='page' name='page' action="/cgi-bin/math.py" method="get">
+	<form id='page' name='page' action="/" method="POST">
 	    <center>
 		<input name='a' size=4> *x + <input name='b' size=4> *y + <input name='c' size=4> *z = <input name='d' size=4>
 		<br>
@@ -49,11 +51,11 @@
 		<br>
 		<input name='i' size=4> *x + <input name='j' size=4> *y + <input name='k' size=4> *z = <input name='l' size=4>
 		<br>
-		<input type='button' value='enter' onclick=' root(); '> 
+			<button type='submit'>enter</button>
 		<hr>
-		x = <input name='x1' size=16 readonly> <br>
-		y = <input name='x2' size=16 readonly> <br>
-		z = <input name='x3' size=16 readonly> <br>
+		x = <input name='x1' size=16 value="{{ data.x1 }}" readonly> <br>
+		y = <input name='x2' size=16 value="{{ data.x2 }}" readonly> <br>
+		z = <input name='x3' size=16 value="{{ data.x3 }}" readonly> <br>
 	    </center>
 	</form>
 </body>

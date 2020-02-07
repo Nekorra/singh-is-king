@@ -1,5 +1,62 @@
+from http.server import HTTPServer, BaseHTTPRequestHandler
 import cgi
-form = cgi.FieldStorage()
+from jinja2 import Template
+from calculator import Calculator
+
+class Log():
+    def __init__(self, file="logs.txt"):
+        self.file = open(file, "a")
+    def write(self, text):
+        self.file.write(text+"\n")
+    def close(self):
+        self.file.close()
+    def __del__(self):
+        self.file.close()
+
+# HTTP request Handler
+class Serv(BaseHTTPRequestHandler):
+    # GET for path '/'
+    def do_GET(self, context={}):
+        # Open Log
+        logs = Log()
+        if self.path == '/':
+            self.path = '/calc.html'
+        try:
+            file_to_open = Template(open(self.path[1:]).read()).render(data=context)
+            self.send_response(200)
+            logs.write(f'%s - - [%s] "%s %s %s" %s -' % (str(self.client_address[0]), self.log_date_time_string(), "GET", self.path, self.request_version, "301"))
+            logs.close()
+        except:
+            file_to_open = "File not found"
+            self.send_response(404)
+        self.end_headers()
+        self.wfile.write(bytes(file_to_open, 'utf-8'))
+    # POST handler
+    def do_POST(self):
+        logs = Log()
+        # Parse the form data posted
+        form = cgi.FieldStorage(
+            fp=self.rfile,
+            headers=self.headers,
+            environ={'REQUEST_METHOD': 'POST',
+                     'CONTENT_TYPE': self.headers['Content-Type'],
+                     })
+
+        # Begin the response
+        self.send_response(301)
+        # Write to logs
+        logs.write(f'%s - - [%s] "%s %s %s" %s -' % (str(self.client_address), self.log_date_time_string(), "POST", self.path, self.request_version, "301"))
+        logs.close()
+        # Get field data
+        form_data = {}
+        for field in form.keys():
+            form_data[field] = form[field]
+        A = Calculator(**form_data)
+        self.do_GET(context={"x1":0, "x2":1, "x3":2})
+
+httpd = HTTPServer(('0.0.0.0', 8000), Serv)
+httpd.serve_forever()
+'''
 a = form.getvalue('a')
 b = form.getvalue('b')
 c = form.getvalue('c')
@@ -127,3 +184,4 @@ for fd in range(n): # fd stands for focus diagonal
 print("Check work:")
 print(BM)
 print_matrix('',matrix_multiply(A,BM))
+'''
