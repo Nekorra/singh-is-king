@@ -135,24 +135,12 @@ def invert_matrix(A, tol=None):
     else:
         raise ArithmeticError("Matrix inverse out of tolerance.")
 
-
-
-
-
-print('entered matrix:')
 A = [[5,4,3,6],[4,3,2,5],[3,2,9,9],[7,8,2,1]]
 B = [[2],[5],[4],[10]]
-print_matrix(A)
-print()
-print("Solution matrix")
-print_matrix(B)
-print()
-print('Inverse Matrix')
-print_matrix
-Inv = invert_matrix(A,9)
-print_matrix(Inv)
-print()
 
-print('solution: [x],[y],[z] etc.')
-sol = matrix_multiply(Inv, B)
-print(sol)
+def solve(A, B):
+    Inv = invert_matrix(A,9)
+    sol = matrix_multiply(Inv, B)
+    return sol
+
+print(solve(A, B))
